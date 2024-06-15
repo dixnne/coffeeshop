@@ -63,7 +63,7 @@ export class CoffeeshopAPIService {
 
   postClient(name: string, email: string, phone: string, password: string) {
     const body = {
-      splitNsName: name,
+      name: name,
       email: email,
       phone: phone,
       password: password
