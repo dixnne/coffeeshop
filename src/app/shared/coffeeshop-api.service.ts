@@ -33,43 +33,45 @@ export class CoffeeshopAPIService {
     return this.http.get("https://cafe.losnarvaez.com/orders");
   }
 
-  getClient(client: string) {
-    return this.http.get("https://cafe.losnarvaez.com/clients/client_id?value=" + client);
+  getClient(id: number) {
+    return this.http.get("https://cafe.losnarvaez.com/clients/client_id?value=" + id);
   }
 
-  getEmployee(employee: string) {
-    return this.http.get("https://cafe.losnarvaez.com/employees/employee_id?value=" + employee);
+  getClientByEmail(client: string) {
+    return this.http.get("https://cafe.losnarvaez.com/clients/email?value=" + client);
   }
 
-  getProduct(product: string) {
+  getEmployeeByEmail(employee: string) {
+    return this.http.get("https://cafe.losnarvaez.com/employees/email?value=" + employee);
+  }
+
+  getProduct(product: number) {
     return this.http.get("https://cafe.losnarvaez.com/products/product_id?value=" + product);
   }
 
-  getSupply(supply: string) {
+  getSupply(supply: number) {
     return this.http.get("https://cafe.losnarvaez.com/supplies/supply_id?value=" + supply);
   }
 
-  getSupplier(supplier: string) {
+  getSupplier(supplier: number) {
     return this.http.get("https://cafe.losnarvaez.com/suppliers/supplier_id?value=" + supplier);
   }
 
-  getOrder(order: string) {
-    return this.http.get("https://cafe.losnarvaez.com/orders/order_id?value=" + order);
+  getOrder(client: number) {
+    return this.http.get("https://cafe.losnarvaez.com/orders/client_id?value=" + client);
   }
 
   postClient(name: string, email: string, phone: string, password: string) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       splitNsName: name,
       email: email,
       phone: phone,
       password: password
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/clients", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/clients", body);
   }
 
   postEmployee(rank: string, name: string, email: string, phone: string, password: string) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       rank: rank,
       name: name,
@@ -77,69 +79,65 @@ export class CoffeeshopAPIService {
       phone: phone,
       password: password
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/employees", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/employees", body);
   }
 
   postSupplier(name: string, supply_id: number, price: number) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       name: name,
       supply_id: supply_id,
-      price: price
+      price: Math.round((price + Number.EPSILON) * 100) / 100
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/suppliers", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/suppliers", body);
   }
 
   postSupply(name: string, quantity: number) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       name: name,
       quantity: quantity
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/supply", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/supplies", body);
   }
 
   postProduct(name: string, description: string, price: number) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       name: name,
       description: description,
-      price: price
+      price: Math.round((price + Number.EPSILON) * 100) / 100
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/products", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/products", body);
   }
 
   postOrder(client_id: number, date: string, total: number) {
-    const headers = { 'content-type': 'application/json'}  
     const body = {
       client_id: client_id,
       date: date,
       total: total
     }
-    return this.http.post<any>("https://cafe.losnarvaez.com/orders", body, {"headers": headers});
+    return this.http.post<any>("https://cafe.losnarvaez.com/orders", body);
   }
 
-  deleteClient(id: string) { 
+  deleteClient(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/clients/" + id);
   }
 
-  deleteEmployee(id: string) { 
+  deleteEmployee(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/employees/" + id);
   }
 
-  deleteSupplier(id: string) { 
+  deleteSupplier(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/suppliers/" + id);
   }
 
-  deleteSupply(id: string) { 
+  deleteSupply(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/supplies/" + id);
   }
 
-  deleteProduct(id: string) { 
+  deleteProduct(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/products/" + id);
   }
 
-  deleteOrder(id: string) { 
+  deleteOrder(id: number) { 
     return this.http.delete("https://cafe.losnarvaez.com/orders/" + id);
   }
 }

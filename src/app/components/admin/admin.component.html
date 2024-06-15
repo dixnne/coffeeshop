@@ -1,1 +1,27 @@
-<p>admin works!</p>
+<section class="bg-dark-subtle py-2">
+    <nav class="d-flex justify-content-center">
+        <span (click)="changePage('products')" class="link-dark">Products</span>
+        <span (click)="changePage('suppliers')" class="link-dark mx-5">Suppliers</span>
+        <span (click)="changePage('supplies')" class="link-dark me-5">Supplies</span>
+        <span (click)="changePage('orders')" class="link-dark">Orders</span>
+    </nav>
+</section>
+<section class="py-4">
+    <div class="container">
+        <h3 class="text-center">{{currentPage}}</h3>
+            @switch (currentPage) {
+                @case ("Products") {
+                    <app-productsadmin></app-productsadmin>
+                }
+                @case ("Supplies") {
+                    <app-supplies></app-supplies>
+                }
+                @case ("Suppliers") {
+                    <app-suppliers></app-suppliers>
+                }
+                @case ("Orders") {
+                    <app-orders></app-orders>
+                }
+            }
+    </div>
+</section>

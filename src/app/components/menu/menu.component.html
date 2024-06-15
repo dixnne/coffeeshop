@@ -1,1 +1,36 @@
-<p>menu works!</p>
+<section class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="text-center border-3 border-dark border-bottom">
+                    Your Order
+                </h3>
+                @for (product of orderItems; track $index) {
+                    <p>{{product}}</p>
+                }
+                @if (order.length > 0) {
+                    <p class="border-top border-dark border-3">Total: $ {{total}}</p>
+                    <button (click)="makeOrder()" class="btn btn-dark w-100">Send Order</button>
+                }
+            </div>
+            <div class="col-md-8">
+                <div class="row row-cols-3 g-4">
+                    @for (product of products; track $index) {
+                        <div class="col h-100">
+                            <div class="card h-100">
+                                <div class="card-header bg-dark text-white">
+                                    {{product.name}}
+                                </div>
+                                <ul class="list-group list-group-flush h-100">
+                                  <li class="list-group-item h-100">{{product.description}}</li>
+                                  <li class="list-group-item">$ {{product.price}}</li>
+                                  <li (click)="addToOrder(product.product_id)" class="list-group-item"><button class="btn btn-dark">Add to Order</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+<section class="py-4">
+    <div class="container col-8">
+        <h3 class="text-center border-bottom border-dark border-3">Add Supply</h3>
+        <div class="form-floating mb-3">
+            <input [(ngModel)]="name" type="text" class="form-control" id="name" placeholder="Name">
+            <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" placeholder="Quantity">
+            <label for="quantity">Quantity</label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button (click)="add()" class="btn btn-dark">Add</button>
+        </div>
+    </div>
+</section>

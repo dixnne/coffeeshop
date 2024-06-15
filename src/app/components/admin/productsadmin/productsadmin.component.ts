@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import Swal from 'sweetalert2';
+import { RouterLink, RouterModule } from '@angular/router';
 import { CoffeeshopAPIService } from '../../../shared/coffeeshop-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-suppliers',
+  selector: 'app-productsadmin',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './suppliers.component.html',
-  styleUrl: './suppliers.component.css'
+  templateUrl: './productsadmin.component.html',
+  styleUrl: './productsadmin.component.css'
 })
-export class SuppliersComponent {
-  suppliers?: any;
+export class ProductsadminComponent {
+  products?: any;
 
   constructor(private coffeeshopAPI: CoffeeshopAPIService) {
-    this.getSuppliers();
+    this.getProducts();
   }
 
-  getSuppliers() {
-    this.coffeeshopAPI.getSuppliers().subscribe((res: any) => {
-      this.suppliers = res;
+  getProducts() {
+    this.coffeeshopAPI.getProducts().subscribe((res: any) => {
+      this.products = res;
     });
   }
 
@@ -34,7 +34,7 @@ export class SuppliersComponent {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.coffeeshopAPI.deleteSupplier(id).subscribe((res: any) => {
+        this.coffeeshopAPI.deleteProduct(id).subscribe((res: any) => {
           console.log(res);
           if (res.error) {
             Swal.fire({
@@ -43,7 +43,7 @@ export class SuppliersComponent {
               icon: "error"
             });
           } else {
-            this.getSuppliers();
+            this.getProducts();
             Swal.fire({
               title: "Deleted!",
               text: res.message,

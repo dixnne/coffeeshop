@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoffeeshopAPIService } from '../../../shared/coffeeshop-api.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent {
+  orders?: any;
 
+  constructor(private coffeeshopAPI: CoffeeshopAPIService) {
+    this.coffeeshopAPI.getOrders().subscribe(res => {
+      this.orders = res;
+    });
+  }
 }
